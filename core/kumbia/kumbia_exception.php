@@ -58,7 +58,9 @@ class KumbiaException extends Exception
         } else {
             header('HTTP/1.1 500 Internal Server Error');
         }
-
+        // Registra la autocarga de helpers
+        spl_autoload_register('kumbia_autoload_helper', true, true);
+        
         extract(Router::get(), EXTR_OVERWRITE);
 
         $Controller = Util::camelcase($controller);
